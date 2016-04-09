@@ -90,9 +90,9 @@ public class NewProjectGUI {
 		newProjectPanel.add(newProjectTextField);
 	}
 	
-	public void newProjectDateSpinners() {						
+	public void newProjectDateSpinners() {												//3 JSpinners used to allow user to specify Project due dates
 		
-		String[] yearStrings = {								//Year String instantiation
+		String[] yearStrings = {														//Year String instantiation
 				"2016","2017","2018","2019","2020"
 				}; 
 		
@@ -102,7 +102,7 @@ public class NewProjectGUI {
 		newProjectDateSpinnerYear.setBounds(550, 180, 100, 25);
 		newProjectPanel.add(newProjectDateSpinnerYear);
 		
-																//Day String instantiation
+																						//Day String instantiation
 		String[] dayStrings = {									
 				"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11",
 				"12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23",
@@ -115,7 +115,7 @@ public class NewProjectGUI {
 		newProjectDateSpinnerDay.setBounds(500, 180, 50, 25);
 		newProjectPanel.add(newProjectDateSpinnerDay);
 		
-		String[] monthStrings = {								//Month String instantiation	
+		String[] monthStrings = {														//Month String instantiation	
 				"January", "February", "March", "April",
 				"May", "June", "July", "August",
 				"September", "October", "November", "December"
@@ -198,19 +198,19 @@ public class NewProjectGUI {
 		
 	}
 	
-	public void allProjectsButtons() {
-		btnViewSingleProject = new JButton("View");
+	public void allProjectsButtons() {													// Creates two buttons and associated Event Handlers
+		btnViewSingleProject = new JButton("View");										
 		btnViewSingleProject.setBounds(350, 300, 150, 50);
 		
-		btnViewSingleProject.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent event) { 
-				
-				String retVal = allProjectsList.getSelectedValue();
+		btnViewSingleProject.addActionListener(new ActionListener() {					
+			public void actionPerformed(ActionEvent event) {							//Anonymous inner class implements ActionHandler
+																						//retrieves selected value of allProjectsList, converts to string
+				String retVal = allProjectsList.getSelectedValue();						
 				String retValToString = retVal.toString();
-				String[] splitProjectValues = retValToString.split(" ");
+				String[] splitProjectValues = retValToString.split(" ");				//Populates an array of strings using split values from retrieved string value
 				
-				indProjectNameTextField.setText(splitProjectValues[0]);
-				indProjectStartDateTextField.setText(splitProjectValues[1]);
+				indProjectNameTextField.setText(splitProjectValues[0]);					//Sets text field values using using indices from ^ array, where index corresponds
+				indProjectStartDateTextField.setText(splitProjectValues[1]);			//to specific text field
 				indProjectDueDateTextField.setText(splitProjectValues[2]);
 				indProjectUrgencyTextField.setText(splitProjectValues[3]);
 				/*
@@ -239,18 +239,18 @@ public class NewProjectGUI {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void allProjectsList() {
-		/**
+	public void allProjectsList() {														//Method creates JList and JScrollPane Objects
+		/**																				
 		 * 
 		 */
 		try {
-			projectArraysAndStorage.newProjectManipulableList();
+			projectArraysAndStorage.newProjectManipulableList();						//Array from ProjectArraysAndStorage is populated
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		allProjectsList = new JList<String>(projectArraysAndStorage.projectsStringArray);
-		allProjectsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		allProjectsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);			//List is created from projectsStringArray
 		allProjectsList.setLayoutOrientation(JList.VERTICAL);
 		allProjectsList.setBounds(50, 100, 300, 100);
 		allProjectsList.setVisibleRowCount(1000);
@@ -261,7 +261,7 @@ public class NewProjectGUI {
 		allProjectsPanel.add(projectListScroller);
 	}
 	
-	public void allProjectsIndividualView() {
+	public void allProjectsIndividualView() {											//Method creates JLabel and JTextField Objects placed in the allProjects pane
 		allProjectsNameLbl = new JLabel("Name:");
 		allProjectsNameLbl.setBounds(500, 100, 100, 20);
 		allProjectsPanel.add(allProjectsNameLbl);
