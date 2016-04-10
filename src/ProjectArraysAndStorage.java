@@ -6,8 +6,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-public class ProjectArraysAndStorage {
+/**
+ * @author Rowan
+ * 
+ */
+public class ProjectArraysAndStorage { 
 	
 	/*
 	List <String> projectNameList;
