@@ -28,23 +28,23 @@ public class ProjectArraysAndStorage {
 
 
 	
-public int getProjectsArrayLength() {
+public int getProjectsArrayLength() {												// getter returns length of projectsStringArray array
 	return projectsStringArray.length;
 }
 
-public int getProjectArrayListSize() {
+public int getProjectArrayListSize() {												//Getter returns size of projectArrayList ArrayList
 	return projectArrayList.size();
 }
 
-public void addProjectToArrayList(Project newProject) {
-	projectArrayList.add(newProject);
-}
+public void addProjectToArrayList(Project newProject) {								//once ProjectArraysAndStorage class instantiated,
+	projectArrayList.add(newProject);												//method takes newProject created by btnCreate event handler as parameter,
+}																					// adds newly instantiated Project Object to projectArrayList
 
-public void newProjectManipulableList() throws FileNotFoundException {
-	File projectFile = new File("projectlist.txt");
+public void newProjectManipulableList() throws FileNotFoundException {				//Method populates an array using while loop to scan values
+	File projectFile = new File("projectlist.txt");									//into array from text file 
 	Scanner scanIntoList = new Scanner(projectFile);
 	int i = 0;
-	while (scanIntoList.hasNextLine() && i < projectsStringArray.length) {
+	while (scanIntoList.hasNextLine() && i < projectsStringArray.length) {			
         projectsStringArray[i] = scanIntoList.nextLine();
         i++; 
 	}
