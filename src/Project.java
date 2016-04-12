@@ -1,6 +1,10 @@
-
-public class Project {
-	private String projectName;
+/**
+ * @author Rowan Guyton
+ * Project class is a data transfer object used for instantiating 
+ * Project objects to be manipulated by GUI elements
+ */
+public class Project {												// 4 private variables encapsulate all necessary data
+	private String projectName;										// String data type used for ubiquity currently
 	private String projectStartDate;
 	private String projectDueDate;
 	private String projectPriority;
@@ -14,19 +18,19 @@ public class Project {
 		this.projectPriority = projectPriority;
 	}
 	
-	public String getProjectName(){
+	public String getProjectName(){									// Project Name getter
 		return projectName;
 	}
 	
-	public String getprojectStartDate(){
+	public String getprojectStartDate(){							// Project Start Date getter
 		return projectStartDate;
 	}
 	
-	public String getProjectDueDate(){
+	public String getProjectDueDate(){								// Project Due Date getter
 		return projectDueDate;
 	}
 	
-	public String getProjectPriority(){
+	public String getProjectPriority(){								// Project Priority getter 
 		return projectPriority;
 	}
 
