@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -18,9 +19,29 @@ public class NewProjectGUI {
 	ArrayList<Project> projectArrayList = new ArrayList<Project>();
 	ArrayList<String> projectlist = new ArrayList<String>();
 	String projectName;
+	Dimension maxLabelAndTextFieldSize = new Dimension (150, 20);
+	
 	private JFrame newProjectFrame;
 	private JTabbedPane sortedTabbedPane;
-	private JPanel newProjectPanel, allProjectsPanel, calendarPanel;
+	private JPanel newProjectPanel, 
+			newProjectSubPanel1, 
+			newProjectSubPanel2, 
+			newProjectSubPanel3, 
+			newProjectSubPanel4,
+			newProjectSubPanel5,
+			newProjectSubPanel6,
+			newProjectSubPanel7,
+			newProjectSubPanel8,
+			newProjectSubPanel9,
+			newProjectSubPanel10,
+			allProjectsPanel,
+			allProjectsSubPanel1,
+			allProjectsSubPanel2,
+			allProjectsSubPanel3,
+			allProjectsSubPanel4,
+			allProjectsSubPanel5,
+			allProjectsSubPanel6,
+			calendarPanel;
 	private JLabel newProjectNameLbl, lblNewProjectDueDateLbl, lblNewProjectUrgencyLbl;
 	private JLabel allProjectsNameLbl, allProjectsStartDateLbl, allProjectsDueDateLbl, allProjectsUrgencyLbl; 
 	private JScrollPane projectListScroller;
@@ -36,7 +57,7 @@ public class NewProjectGUI {
 	}
 	
 	public NewProjectGUI() {															//CONSTRUCTOR
-		generateNewProjectForm();
+		generateForm();
 		newProjectLabels();
 		newProjectTextField();
 		newProjectButtons();
@@ -50,44 +71,128 @@ public class NewProjectGUI {
 		newProjectFrame.setVisible(true);
 	}
 	
-	public void generateNewProjectForm() {												//Frame and Panel Instantiation
+	public void generateForm() {														//Frame and Panel Instantiation
 		newProjectFrame = new JFrame();
 		newProjectFrame.setTitle("Sorted! (New Project)");
 		newProjectFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		newProjectFrame.setSize(800,600);
-		newProjectFrame.setResizable(false);
+		newProjectFrame.setSize(640,360);
+		newProjectFrame.setResizable(true);
 		
 		newProjectPanel = new JPanel();
-		newProjectPanel.setLayout(null);
+		newProjectPanel.setLayout(new GridLayout(2,1,5,5));
+		//newProjectPanel.setBackground(Color.DARK_GRAY);
+		
+		newProjectSubPanel1 = new JPanel();
+		newProjectSubPanel1.setLayout(new GridLayout(1,2));
+		newProjectPanel.add(newProjectSubPanel1);
+		
+		newProjectSubPanel2 = new JPanel();
+		newProjectSubPanel2.setLayout(new BoxLayout(newProjectSubPanel2, BoxLayout.LINE_AXIS));
+		newProjectPanel.add(newProjectSubPanel2);
+		
+		newProjectSubPanel3 = new JPanel();
+		newProjectSubPanel3.setLayout(new BoxLayout(newProjectSubPanel3, BoxLayout.PAGE_AXIS));
+		//newProjectSubPanel3.setBackground(Color.DARK_GRAY);
+		newProjectSubPanel1.add(newProjectSubPanel3);
+		
+		newProjectSubPanel4 = new JPanel();
+		newProjectSubPanel4.setLayout(new GridLayout(3,1,5,5));
+		//newProjectSubPanel4.setBackground(Color.DARK_GRAY);
+		newProjectSubPanel1.add(newProjectSubPanel4);
+		
+		newProjectSubPanel5 = new JPanel();
+		newProjectSubPanel5.setLayout(new GridLayout(1,1));
+		newProjectSubPanel4.add(newProjectSubPanel5);
+		
+		newProjectSubPanel6 = new JPanel();
+		newProjectSubPanel6.setLayout(new GridLayout(1,3));
+		newProjectSubPanel4.add(newProjectSubPanel6);
+		
+		newProjectSubPanel7 = new JPanel();
+		newProjectSubPanel7.setLayout(new GridLayout(1,1));
+		newProjectSubPanel4.add(newProjectSubPanel7);
+		
+		/*
+		newProjectSubPanel8 = new JPanel();
+		newProjectSubPanel8.setLayout(new GridLayout(1,1));
+		newProjectSubPanel3.add(newProjectSubPanel8);
+		
+		newProjectSubPanel9 = new JPanel();
+		newProjectSubPanel9.setLayout(new GridLayout(1,1));
+		newProjectSubPanel3.add(newProjectSubPanel9);
+		
+		newProjectSubPanel10 = new JPanel();
+		newProjectSubPanel10.setLayout(new GridLayout(1,1));
+		newProjectSubPanel3.add(newProjectSubPanel10);
+		*/
+		
 		allProjectsPanel = new JPanel();
-		allProjectsPanel.setLayout(null);
-		calendarPanel = new JPanel();
-		calendarPanel.setLayout(null);
+		allProjectsPanel.setLayout(new GridLayout(2,1,5,5));
+		
+		allProjectsSubPanel1 = new JPanel();
+		allProjectsSubPanel1.setLayout(new GridLayout(1,2,5,5));
+		allProjectsPanel.add(allProjectsSubPanel1);
+		
+		allProjectsSubPanel2 = new JPanel();
+		allProjectsSubPanel2.setLayout(new BoxLayout(allProjectsSubPanel2, BoxLayout.LINE_AXIS));
+		allProjectsPanel.add(allProjectsSubPanel2);
+		
+		allProjectsSubPanel3 = new JPanel();
+		allProjectsSubPanel3.setLayout(new GridLayout(1,1));
+		allProjectsSubPanel1.add(allProjectsSubPanel3);
+		
+		allProjectsSubPanel4 = new JPanel();
+		allProjectsSubPanel4.setLayout(new GridLayout(1,2));
+		allProjectsSubPanel1.add(allProjectsSubPanel4);
+		
+		allProjectsSubPanel5 = new JPanel();
+		allProjectsSubPanel5.setLayout(new BoxLayout(allProjectsSubPanel5, BoxLayout.PAGE_AXIS));
+		allProjectsSubPanel4.add(allProjectsSubPanel5);
+		
+		allProjectsSubPanel6 = new JPanel();
+		allProjectsSubPanel6.setLayout(new BoxLayout(allProjectsSubPanel6, BoxLayout.PAGE_AXIS));
+		allProjectsSubPanel4.add(allProjectsSubPanel6);
+		//calendarPanel = new JPanel();
+		//calendarPanel.setLayout(null);
 		
 		sortedTabbedPane = new JTabbedPane();
 		sortedTabbedPane.addTab("New Project", newProjectPanel);
 		sortedTabbedPane.addTab("All Projects", allProjectsPanel);
-		sortedTabbedPane.addTab("Calendar", calendarPanel);
+		//sortedTabbedPane.addTab("Calendar", calendarPanel);
 	}
 	
 	public void newProjectLabels() {													//JLabels for New Project Tab
+		
+		//Dimension maxLabelAndTextFieldSize = new Dimension (150, 20);
+		//newProjectSubPanel3.setAlignmentX(Box.CENTER_ALIGNMENT);
+		//newProjectSubPanel3.setAlignmentY(Box.CENTER_ALIGNMENT);
 		newProjectNameLbl = new JLabel("Name Your Project:");
-		newProjectNameLbl.setBounds(250, 140, 150, 20);
-		newProjectPanel.add(newProjectNameLbl);
+		newProjectSubPanel3.add(Box.createVerticalGlue());
+		newProjectNameLbl.setMaximumSize(maxLabelAndTextFieldSize);
+		//newProjectNameLbl.setAlignmentX(Box.CENTER_ALIGNMENT);
+		//newProjectNameLbl.setAlignmentY(Box.CENTER_ALIGNMENT);
+		//newProjectSubPanel3.add(Box.createHorizontalGlue());
+		//newProjectSubPanel3.add(Box.createVerticalGlue());
+		newProjectSubPanel3.add(newProjectNameLbl);
+		//newProjectSubPanel3.add(Box.createHorizontalGlue());
+		newProjectSubPanel3.add(Box.createVerticalGlue());
 		
 		lblNewProjectDueDateLbl = new JLabel("When is it due?");
-		lblNewProjectDueDateLbl.setBounds(250, 180, 150, 20);
-		newProjectPanel.add(lblNewProjectDueDateLbl);
+		lblNewProjectDueDateLbl.setMaximumSize(maxLabelAndTextFieldSize);
+		newProjectSubPanel3.add(lblNewProjectDueDateLbl);
+		newProjectSubPanel3.add(Box.createVerticalGlue());
 		
 		lblNewProjectUrgencyLbl = new JLabel("How urgent is it?");
-		lblNewProjectUrgencyLbl.setBounds(250, 220, 150, 20);
-		newProjectPanel.add(lblNewProjectUrgencyLbl);
+		lblNewProjectUrgencyLbl.setMaximumSize(maxLabelAndTextFieldSize);
+		newProjectSubPanel3.add(lblNewProjectUrgencyLbl);
+		newProjectSubPanel3.add(Box.createVerticalGlue());
 	}
 	
 	public void newProjectTextField() {													//JTextField for New Project Tab
 		newProjectTextField = new JTextField();
 		newProjectTextField.setBounds(400, 150, 150, 20);
-		newProjectPanel.add(newProjectTextField);
+		newProjectTextField.add(Box.createVerticalGlue());
+		newProjectSubPanel5.add(newProjectTextField);
 	}
 	
 	public void newProjectDateSpinners() {												//3 JSpinners used to allow user to specify Project due dates
@@ -99,8 +204,8 @@ public class NewProjectGUI {
 		SpinnerListModel yearModel = new SpinnerListModel(yearStrings);
 		
 		newProjectDateSpinnerYear = new JSpinner(yearModel);
-		newProjectDateSpinnerYear.setBounds(550, 180, 100, 25);
-		newProjectPanel.add(newProjectDateSpinnerYear);
+		//newProjectDateSpinnerYear.setBounds(550, 180, 100, 25);
+		newProjectSubPanel6.add(newProjectDateSpinnerYear);
 		
 																						//Day String instantiation
 		String[] dayStrings = {									
@@ -112,8 +217,8 @@ public class NewProjectGUI {
 		SpinnerListModel dayModel = new SpinnerListModel(dayStrings);
 		
 		newProjectDateSpinnerDay = new JSpinner(dayModel);
-		newProjectDateSpinnerDay.setBounds(500, 180, 50, 25);
-		newProjectPanel.add(newProjectDateSpinnerDay);
+		//newProjectDateSpinnerDay.setBounds(500, 180, 50, 25);
+		newProjectSubPanel6.add(newProjectDateSpinnerDay);
 		
 		String[] monthStrings = {														//Month String instantiation	
 				"January", "February", "March", "April",
@@ -124,8 +229,8 @@ public class NewProjectGUI {
 		SpinnerListModel monthModel = new SpinnerListModel(monthStrings);
 		
 		newProjectDateSpinnerMonth = new JSpinner(monthModel);
-		newProjectDateSpinnerMonth.setBounds(400, 180, 100, 25);
-		newProjectPanel.add(newProjectDateSpinnerMonth);
+		//newProjectDateSpinnerMonth.setBounds(400, 180, 100, 25);
+		newProjectSubPanel6.add(newProjectDateSpinnerMonth);
 	}
 	
 	public void newProjectComboBox() {													//JComboBox generation for New Project Tab
@@ -133,14 +238,14 @@ public class NewProjectGUI {
 		String[] urgencyLevels = {"High", "Medium", "Low"};
 		
 		newProjectComboBox = new JComboBox<Object>(urgencyLevels);
-		newProjectComboBox.setBounds(400, 220, 80, 25);
-		newProjectPanel.add(newProjectComboBox);
+		//newProjectComboBox.setBounds(400, 220, 80, 25);
+		newProjectSubPanel7.add(newProjectComboBox);
 		
 	}
 	
 	public void newProjectButtons() {													//JButtons 'btnCreate' and 'btnViewAll' for New Project Tab
 		btnCreate = new JButton("Create New Project");
-		btnCreate.setBounds(325, 265, 150, 50);
+		//btnCreate.setBounds(325, 265, 150, 50);
 		btnCreate.addActionListener(new ActionListener() {								//Implementation of ActionListener handling button click with anonymous inner class
 			
 			public void actionPerformed(ActionEvent event) {							//Anonymous inner class generates a new Project object using 
@@ -185,23 +290,26 @@ public class NewProjectGUI {
 				
 			}
 		});
-		newProjectPanel.add(btnCreate);
+		newProjectSubPanel2.add(Box.createHorizontalGlue());
+		newProjectSubPanel2.add(btnCreate);
 		
 		btnViewAll = new JButton("View All Projects");
-		btnViewAll.setBounds(325, 340, 150, 50);
+		//btnViewAll.setBounds(325, 340, 150, 50);
 		btnViewAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				sortedTabbedPane.setSelectedIndex(1);
 			}
 		});
-		newProjectPanel.add(btnViewAll);
+		newProjectSubPanel2.add(Box.createHorizontalGlue());
+		newProjectSubPanel2.add(btnViewAll);
+		newProjectSubPanel2.add(Box.createHorizontalGlue());
 		
 	}
 	
 	public void allProjectsButtons() {													// Creates two buttons and associated Event Handlers
 		btnViewSingleProject = new JButton("View");										
-		btnViewSingleProject.setBounds(350, 300, 150, 50);
-		
+		btnViewSingleProject.setSize(150, 50);
+		allProjectsSubPanel2.add(Box.createGlue());
 		btnViewSingleProject.addActionListener(new ActionListener() {					
 			public void actionPerformed(ActionEvent event) {							//Anonymous inner class implements ActionHandler
 																						//retrieves selected value of allProjectsList, converts to string
@@ -226,16 +334,18 @@ public class NewProjectGUI {
 				*/
 			}
 		});
-		allProjectsPanel.add(btnViewSingleProject);
+		allProjectsSubPanel2.add(btnViewSingleProject);
 		
 		btnMoveToNewProject = new JButton("New Project");
-		btnMoveToNewProject.setBounds(200, 300, 150, 50);
+		btnMoveToNewProject.setSize(150, 50);
+		allProjectsSubPanel2.add(Box.createGlue());
 		btnMoveToNewProject.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				sortedTabbedPane.setSelectedIndex(0);
 			}
 		});
-		allProjectsPanel.add(btnMoveToNewProject);
+		allProjectsSubPanel2.add(btnMoveToNewProject);
+		allProjectsSubPanel2.add(Box.createGlue());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -252,47 +362,61 @@ public class NewProjectGUI {
 		allProjectsList = new JList<String>(projectArraysAndStorage.projectsStringArray);
 		allProjectsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);			//List is created from projectsStringArray
 		allProjectsList.setLayoutOrientation(JList.VERTICAL);
-		allProjectsList.setBounds(50, 100, 300, 100);
 		allProjectsList.setVisibleRowCount(1000);
 		
 		
 		projectListScroller = new JScrollPane(allProjectsList);
-		projectListScroller.setBounds(50, 100, 340, 140);
-		allProjectsPanel.add(projectListScroller);
+		//Dimension ListDimension = new Dimension (350, 120);
+		projectListScroller.setSize(400,250);
+		allProjectsSubPanel3.add(projectListScroller);
 	}
 	
 	public void allProjectsIndividualView() {											//Method creates JLabel and JTextField Objects placed in the allProjects pane
 		allProjectsNameLbl = new JLabel("Name:");
-		allProjectsNameLbl.setBounds(500, 100, 100, 20);
-		allProjectsPanel.add(allProjectsNameLbl);
+		allProjectsNameLbl.setMaximumSize(maxLabelAndTextFieldSize);
+		allProjectsSubPanel5.add(Box.createGlue());
+		allProjectsSubPanel5.add(Box.createHorizontalGlue());
+		allProjectsSubPanel5.add(allProjectsNameLbl);
 		
 		allProjectsStartDateLbl = new JLabel("Started:");
-		allProjectsStartDateLbl.setBounds(500, 130, 100, 20);
-		allProjectsPanel.add(allProjectsStartDateLbl);
+		allProjectsStartDateLbl.setMaximumSize(maxLabelAndTextFieldSize);
+		allProjectsSubPanel5.add(Box.createGlue());
+		allProjectsSubPanel5.add(Box.createHorizontalGlue());
+		allProjectsSubPanel5.add(allProjectsStartDateLbl);
 		
 		allProjectsDueDateLbl = new JLabel("Due:");
-		allProjectsDueDateLbl.setBounds(500, 160, 100, 20);
-		allProjectsPanel.add(allProjectsDueDateLbl);
+		allProjectsDueDateLbl.setMaximumSize(maxLabelAndTextFieldSize);
+		allProjectsSubPanel5.add(Box.createGlue());
+		allProjectsSubPanel5.add(Box.createHorizontalGlue());
+		allProjectsSubPanel5.add(allProjectsDueDateLbl);
 		
 		allProjectsUrgencyLbl = new JLabel("Priority:");
-		allProjectsUrgencyLbl.setBounds(500, 190, 100, 20);
-		allProjectsPanel.add(allProjectsUrgencyLbl);
+		allProjectsUrgencyLbl.setMaximumSize(maxLabelAndTextFieldSize);
+		allProjectsSubPanel5.add(Box.createGlue());
+		allProjectsSubPanel5.add(Box.createHorizontalGlue());
+		allProjectsSubPanel5.add(allProjectsUrgencyLbl);
+		allProjectsSubPanel5.add(Box.createGlue());
 		
 		indProjectNameTextField = new JTextField();
-		indProjectNameTextField.setBounds(600, 100, 150, 20);
-		allProjectsPanel.add(indProjectNameTextField);
+		indProjectNameTextField.setMaximumSize(maxLabelAndTextFieldSize);
+		allProjectsSubPanel6.add(Box.createGlue());
+		allProjectsSubPanel6.add(indProjectNameTextField);
 		
 		indProjectStartDateTextField = new JTextField();
-		indProjectStartDateTextField.setBounds(600, 130, 150, 20);
-		allProjectsPanel.add(indProjectStartDateTextField);
+		indProjectStartDateTextField.setMaximumSize(maxLabelAndTextFieldSize);
+		allProjectsSubPanel6.add(Box.createGlue());
+		allProjectsSubPanel6.add(indProjectStartDateTextField);
 		
 		indProjectDueDateTextField = new JTextField();
-		indProjectDueDateTextField.setBounds(600, 160, 150, 20);
-		allProjectsPanel.add(indProjectDueDateTextField);
+		indProjectDueDateTextField.setMaximumSize(maxLabelAndTextFieldSize);
+		allProjectsSubPanel6.add(Box.createGlue());
+		allProjectsSubPanel6.add(indProjectDueDateTextField);
 		
 		indProjectUrgencyTextField = new JTextField();
-		indProjectUrgencyTextField.setBounds(600, 190, 150, 20);
-		allProjectsPanel.add(indProjectUrgencyTextField);
+		indProjectUrgencyTextField.setMaximumSize(maxLabelAndTextFieldSize);
+		allProjectsSubPanel6.add(Box.createGlue());
+		allProjectsSubPanel6.add(indProjectUrgencyTextField);
+		allProjectsSubPanel6.add(Box.createGlue());
 	}
 
 }
