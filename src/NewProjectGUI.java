@@ -325,7 +325,8 @@ public class NewProjectGUI {
 				indProjectStartDateTextField.setText(splitProjectValues[1]);			//to specific text field
 				indProjectDueDateTextField.setText(splitProjectValues[2]);
 				indProjectUrgencyTextField.setText(splitProjectValues[3]);
-				
+				//ALLOCATE CORRESPONDING ARRAYS TO RETRIEVE VALUES FROM
+				//
 			}
 		});
 		allProjectsSubPanel2.add(btnViewSingleProject);

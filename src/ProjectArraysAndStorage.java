@@ -69,6 +69,7 @@ public void newProjectManipulableList() throws FileNotFoundException {				//Meth
         projectDueDatesArray[i] = scanDueDates.nextLine();
         projectPriorityArray[i] = scanPriorityLevels.nextLine();
         i++; 
+        //
 	}
 	scanNames.close();
 	scanStartDates.close();
