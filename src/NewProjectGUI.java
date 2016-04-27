@@ -159,18 +159,12 @@ public class NewProjectGUI {
 	
 	public void newProjectLabels() {													//JLabels for New Project Tab
 		
-		//Dimension maxLabelAndTextFieldSize = new Dimension (150, 20);
-		//newProjectSubPanel3.setAlignmentX(Box.CENTER_ALIGNMENT);
-		//newProjectSubPanel3.setAlignmentY(Box.CENTER_ALIGNMENT);
 		newProjectNameLbl = new JLabel("Name Your Project:");
 		newProjectSubPanel3.add(Box.createVerticalGlue());
 		newProjectNameLbl.setMaximumSize(maxLabelAndTextFieldSize);
-		//newProjectNameLbl.setAlignmentX(Box.CENTER_ALIGNMENT);
-		//newProjectNameLbl.setAlignmentY(Box.CENTER_ALIGNMENT);
-		//newProjectSubPanel3.add(Box.createHorizontalGlue());
-		//newProjectSubPanel3.add(Box.createVerticalGlue());
+		
 		newProjectSubPanel3.add(newProjectNameLbl);
-		//newProjectSubPanel3.add(Box.createHorizontalGlue());
+		
 		newProjectSubPanel3.add(Box.createVerticalGlue());
 		
 		lblNewProjectDueDateLbl = new JLabel("When is it due?");
@@ -200,7 +194,6 @@ public class NewProjectGUI {
 		SpinnerListModel yearModel = new SpinnerListModel(yearStrings);
 		
 		newProjectDateSpinnerYear = new JSpinner(yearModel);
-		//newProjectDateSpinnerYear.setBounds(550, 180, 100, 25);
 		newProjectSubPanel6.add(newProjectDateSpinnerYear);
 		
 																						//Day String instantiation
@@ -213,7 +206,6 @@ public class NewProjectGUI {
 		SpinnerListModel dayModel = new SpinnerListModel(dayStrings);
 		
 		newProjectDateSpinnerDay = new JSpinner(dayModel);
-		//newProjectDateSpinnerDay.setBounds(500, 180, 50, 25);
 		newProjectSubPanel6.add(newProjectDateSpinnerDay);
 		
 		String[] monthStrings = {														//Month String instantiation	
@@ -225,7 +217,6 @@ public class NewProjectGUI {
 		SpinnerListModel monthModel = new SpinnerListModel(monthStrings);
 		
 		newProjectDateSpinnerMonth = new JSpinner(monthModel);
-		//newProjectDateSpinnerMonth.setBounds(400, 180, 100, 25);
 		newProjectSubPanel6.add(newProjectDateSpinnerMonth);
 	}
 	
@@ -234,18 +225,17 @@ public class NewProjectGUI {
 		String[] urgencyLevels = {"High", "Medium", "Low"};
 		
 		newProjectComboBox = new JComboBox<Object>(urgencyLevels);
-		//newProjectComboBox.setBounds(400, 220, 80, 25);
 		newProjectSubPanel7.add(newProjectComboBox);
 		
 	}
 	
 	public void newProjectButtons() {													//JButtons 'btnCreate' and 'btnViewAll' for New Project Tab
 		btnCreate = new JButton("Create New Project");
-		//btnCreate.setBounds(325, 265, 150, 50);
+		
 		btnCreate.addActionListener(new ActionListener() {								//Implementation of ActionListener handling button click with anonymous inner class
 			
 			public void actionPerformed(ActionEvent event) {							//Anonymous inner class generates a new Project object using 
-				//if (newProjectTextField !=null){																		//values retrieved from JTextField, JSpinners, and JComboBox as parameters.
+																					//values retrieved from JTextField, JSpinners, and JComboBox as parameters.
 				Project newProject = new Project(										
 						newProjectTextField.getText(),									
 						LocalDate.now().toString(),
@@ -255,10 +245,6 @@ public class NewProjectGUI {
 				newProjectTextField.setText(null);
 				newProjectNameLbl.setText("Sorted!");
 				
-				//ProjectArraysAndStorage addNewProject = new ProjectArraysAndStorage();
-				//projectArraysAndStorage.addProjectToArrayList(newProject);
-				
-				//newProjectTextField.setText(projectArraysAndStorage.projectArrayListSizeToString());
 				
 				File projectNames = new File("projectnames.txt");							//These two functions need to be split somehow
 				File projectStartDates = new File("projectstartdates.txt");
@@ -280,7 +266,7 @@ public class NewProjectGUI {
 					projectStartDatePrinter.close();
 					projectDueDatePrinter.close();
 					projectPriorityLevelPrinter.close();
-					//projectPrinter.close();
+					
 					} 
 				
 				catch (IOException e) 
@@ -290,17 +276,13 @@ public class NewProjectGUI {
 				allProjectsSubPanel3.remove(projectListScroller);
 				createAllProjectsList();
 			}
-				//else {
-					//JOptionPane warning = new JOptionPane();
-					//JOptionPane.showMessageDialog(warning, "Project Name field cannot be empty");
-				//}
-			//}
+			
 		});
 		newProjectSubPanel2.add(Box.createHorizontalGlue());
 		newProjectSubPanel2.add(btnCreate);
 		
 		btnViewAll = new JButton("View All Projects");
-		//btnViewAll.setBounds(325, 340, 150, 50);
+		
 		btnViewAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				sortedTabbedPane.setSelectedIndex(1);
@@ -319,26 +301,11 @@ public class NewProjectGUI {
 		btnViewSingleProject.addActionListener(new ActionListener() {					
 			public void actionPerformed(ActionEvent event) {							//Anonymous inner class implements ActionHandler
 				
-				
-				//int i = 0;
 				int selectedIndex = allProjectsList.getSelectedIndex();
 				indProjectNameTextField.setText(projectArraysAndStorage.projectNameArray[selectedIndex]);
 				indProjectStartDateTextField.setText(projectArraysAndStorage.projectStartDatesArray[selectedIndex]);
 				indProjectDueDateTextField.setText(projectArraysAndStorage.projectDueDatesArray[selectedIndex]);
 				indProjectUrgencyTextField.setText(projectArraysAndStorage.projectPriorityArray[selectedIndex]);
-				
-				/*																		//retrieves selected value of allProjectsList, converts to string
-				String retVal = allProjectsList.getSelectedValue();						
-				String retValToString = retVal.toString();
-				String[] splitProjectValues = retValToString.split(" ");				//Populates an array of strings using split values from retrieved string value
-				
-				indProjectNameTextField.setText(splitProjectValues[0]);					//Sets text field values using using indices from ^ array, where index corresponds
-				indProjectStartDateTextField.setText(splitProjectValues[1]);			//to specific text field
-				indProjectDueDateTextField.setText(splitProjectValues[2]);
-				indProjectUrgencyTextField.setText(splitProjectValues[3]);
-				*/
-				//ALLOCATE CORRESPONDING ARRAYS TO RETRIEVE VALUES FROM
-				//
 			}
 		});
 		allProjectsSubPanel2.add(btnViewSingleProject);

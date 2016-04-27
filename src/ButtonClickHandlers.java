@@ -6,11 +6,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 
-public class ButtonClickHandlers {
 
-	//NewProjectGUI newProjectGUI = new NewProjectGUI();
+public class ButtonClickHandlers {
 	
-	/*public void newProjectHandler() {
+}
+/*
+	NewProjectGUI newProjectGUI = new NewProjectGUI();
+	
+	public void newProjectHandler() {
 		Project newProject = new Project(
 				newProjectTextField.getText(),
 				LocalDate.now().toString(),
@@ -45,8 +48,10 @@ public class ButtonClickHandlers {
 			e.printStackTrace();
 		}
 		
-	}*/
+	
 }
+}
+*/
 	
 	
 
