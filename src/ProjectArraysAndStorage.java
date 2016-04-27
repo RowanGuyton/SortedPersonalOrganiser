@@ -63,7 +63,7 @@ public void newProjectManipulableList() throws FileNotFoundException {				//Meth
 	try{
 	int i = 0;
 	
-	while (scanNames != null && (scanNames.hasNextLine() && i < projectNameArray.length)) {			
+	while (scanNames != null && (scanNames.hasNextLine() && i < projectNameArray.length)) {		//Assumes all four Arrays will contain equal quantities of strings	
         projectNameArray[i] = scanNames.nextLine();
         projectStartDatesArray[i] = scanStartDates.nextLine();
         projectDueDatesArray[i] = scanDueDates.nextLine();
@@ -76,7 +76,7 @@ public void newProjectManipulableList() throws FileNotFoundException {				//Meth
 	scanDueDates.close();
 	scanPriorityLevels.close();
 	}
-	catch (NoSuchElementException e){
+	catch (NoSuchElementException e){													//Prevent Exception being thrown at first run with no elements in arrays
 		// TODO Auto-generated catch block
 					e.printStackTrace();
 	}

@@ -31,17 +31,13 @@ public class NewProjectGUI {
 			newProjectSubPanel5,
 			newProjectSubPanel6,
 			newProjectSubPanel7,
-			newProjectSubPanel8,
-			newProjectSubPanel9,
-			newProjectSubPanel10,
 			allProjectsPanel,
 			allProjectsSubPanel1,
 			allProjectsSubPanel2,
 			allProjectsSubPanel3,
 			allProjectsSubPanel4,
 			allProjectsSubPanel5,
-			allProjectsSubPanel6,
-			calendarPanel;
+			allProjectsSubPanel6;
 	private JLabel newProjectNameLbl, lblNewProjectDueDateLbl, lblNewProjectUrgencyLbl;
 	private JLabel allProjectsNameLbl, allProjectsStartDateLbl, allProjectsDueDateLbl, allProjectsUrgencyLbl; 
 	private JScrollPane projectListScroller;
@@ -63,7 +59,7 @@ public class NewProjectGUI {
 		newProjectButtons();
 		newProjectDateSpinners();
 		newProjectComboBox();
-		allProjectsList();
+		createAllProjectsList();
 		allProjectsButtons();
 		allProjectsIndividualView();
 		
@@ -249,7 +245,7 @@ public class NewProjectGUI {
 		btnCreate.addActionListener(new ActionListener() {								//Implementation of ActionListener handling button click with anonymous inner class
 			
 			public void actionPerformed(ActionEvent event) {							//Anonymous inner class generates a new Project object using 
-																						//values retrieved from JTextField, JSpinners, and JComboBox as parameters.
+				//if (newProjectTextField !=null){																		//values retrieved from JTextField, JSpinners, and JComboBox as parameters.
 				Project newProject = new Project(										
 						newProjectTextField.getText(),									
 						LocalDate.now().toString(),
@@ -275,10 +271,10 @@ public class NewProjectGUI {
 					PrintWriter projectDueDatePrinter = new PrintWriter (new BufferedWriter (new FileWriter(projectDueDates, true)));
 					PrintWriter projectPriorityLevelPrinter = new PrintWriter (new BufferedWriter (new FileWriter(projectPriorityLevels, true)));
 					
-					projectNamePrinter.print(newProject.getProjectName()+"\n");
-					projectStartDatePrinter.print(newProject.getprojectStartDate()+"\n");
-					projectDueDatePrinter.print(newProject.getProjectDueDate()+"\n");
-					projectPriorityLevelPrinter.print(newProject.getProjectPriority()+"\n");
+					projectNamePrinter.print(newProject.getProjectName()+"\n");									//Print Project Name to file
+					projectStartDatePrinter.print(newProject.getprojectStartDate()+"\n");						//Print Project Start Date to file
+					projectDueDatePrinter.print(newProject.getProjectDueDate()+"\n");							//Print Project Due Date to file
+					projectPriorityLevelPrinter.print(newProject.getProjectPriority()+"\n");					//Print Project Priority to file
 					
 					projectNamePrinter.close();
 					projectStartDatePrinter.close();
@@ -291,8 +287,14 @@ public class NewProjectGUI {
 				{
 					e.printStackTrace();
 				}
-				
+				allProjectsSubPanel3.remove(projectListScroller);
+				createAllProjectsList();
 			}
+				//else {
+					//JOptionPane warning = new JOptionPane();
+					//JOptionPane.showMessageDialog(warning, "Project Name field cannot be empty");
+				//}
+			//}
 		});
 		newProjectSubPanel2.add(Box.createHorizontalGlue());
 		newProjectSubPanel2.add(btnCreate);
@@ -316,7 +318,16 @@ public class NewProjectGUI {
 		allProjectsSubPanel2.add(Box.createGlue());
 		btnViewSingleProject.addActionListener(new ActionListener() {					
 			public void actionPerformed(ActionEvent event) {							//Anonymous inner class implements ActionHandler
-																						//retrieves selected value of allProjectsList, converts to string
+				
+				
+				//int i = 0;
+				int selectedIndex = allProjectsList.getSelectedIndex();
+				indProjectNameTextField.setText(projectArraysAndStorage.projectNameArray[selectedIndex]);
+				indProjectStartDateTextField.setText(projectArraysAndStorage.projectStartDatesArray[selectedIndex]);
+				indProjectDueDateTextField.setText(projectArraysAndStorage.projectDueDatesArray[selectedIndex]);
+				indProjectUrgencyTextField.setText(projectArraysAndStorage.projectPriorityArray[selectedIndex]);
+				
+				/*																		//retrieves selected value of allProjectsList, converts to string
 				String retVal = allProjectsList.getSelectedValue();						
 				String retValToString = retVal.toString();
 				String[] splitProjectValues = retValToString.split(" ");				//Populates an array of strings using split values from retrieved string value
@@ -325,6 +336,7 @@ public class NewProjectGUI {
 				indProjectStartDateTextField.setText(splitProjectValues[1]);			//to specific text field
 				indProjectDueDateTextField.setText(splitProjectValues[2]);
 				indProjectUrgencyTextField.setText(splitProjectValues[3]);
+				*/
 				//ALLOCATE CORRESPONDING ARRAYS TO RETRIEVE VALUES FROM
 				//
 			}
@@ -344,10 +356,8 @@ public class NewProjectGUI {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public void allProjectsList() {														//Method creates JList and JScrollPane Objects
-		/**																				
-		 * 
-		 */
+	public void createAllProjectsList() {														//Method creates JList and JScrollPane Objects
+	
 		try {
 			projectArraysAndStorage.newProjectManipulableList();						//Array from ProjectArraysAndStorage is populated
 		} catch (FileNotFoundException e) {
@@ -361,7 +371,6 @@ public class NewProjectGUI {
 		
 		
 		projectListScroller = new JScrollPane(allProjectsList);
-		//Dimension ListDimension = new Dimension (350, 120);
 		projectListScroller.setSize(400,250);
 		allProjectsSubPanel3.add(projectListScroller);
 	}
