@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 /**
  * @author Rowan
@@ -18,18 +19,22 @@ public class ProjectArraysAndStorage {
 	List <String> projectDueDateList;
 	List <String> projectUrgencyList;
 	*/
-	String[] projectNames;
-	String[] projectStartDates; 
-	String[] projectDueDates;
-	String[] projectPriorities;
+	//String[] projectNames;
+	//String[] projectStartDates; 
+	//String[] projectDueDates;
+	//String[] projectPriorities;
 	ProjectTest testAddingProjectToArrayList = new ProjectTest();
-	String[] projectsStringArray = new String[50];
+	String[] projectNameArray = new String[50];
+	String[] projectStartDatesArray = new String[50];
+	String[] projectDueDatesArray = new String[50];
+	String[] projectPriorityArray = new String[50];
 	ArrayList<Project> projectArrayList = new ArrayList<Project>();
+	
 
 
 	
 public int getProjectsArrayLength() {												// getter returns length of projectsStringArray array
-	return projectsStringArray.length;
+	return projectNameArray.length;
 }
 
 public int getProjectArrayListSize() {												//Getter returns size of projectArrayList ArrayList
@@ -40,15 +45,40 @@ public void addProjectToArrayList(Project newProject) {								//once ProjectArr
 	projectArrayList.add(newProject);												//method takes newProject created by btnCreate event handler as parameter,
 }																					// adds newly instantiated Project Object to projectArrayList
 
+public String[] getProjectNameArray() {
+	return projectNameArray;
+}
+
 public void newProjectManipulableList() throws FileNotFoundException {				//Method populates an array using while loop to scan values
-	File projectFile = new File("projectlist.txt");									//into array from text file 
-	Scanner scanIntoList = new Scanner(projectFile);
+	File projectNames = new File("projectnames.txt");	
+	File projectStartDates = new File("projectstartdates.txt");						//into array from text file 
+	File projectDueDates = new File("projectduedates.txt");
+	File projectPriorityLevels = new File("projectprioritylevels.txt");
+	
+	Scanner scanNames = new Scanner(projectNames);
+	Scanner scanStartDates = new Scanner(projectStartDates);
+	Scanner scanDueDates = new Scanner(projectDueDates);
+	Scanner scanPriorityLevels = new Scanner(projectPriorityLevels);
+	
+	try{
 	int i = 0;
-	while (scanIntoList.hasNextLine() && i < projectsStringArray.length) {			
-        projectsStringArray[i] = scanIntoList.nextLine();
+	
+	while (scanNames != null && (scanNames.hasNextLine() && i < projectNameArray.length)) {			
+        projectNameArray[i] = scanNames.nextLine();
+        projectStartDatesArray[i] = scanStartDates.nextLine();
+        projectDueDatesArray[i] = scanDueDates.nextLine();
+        projectPriorityArray[i] = scanPriorityLevels.nextLine();
         i++; 
 	}
-	scanIntoList.close();	
+	scanNames.close();
+	scanStartDates.close();
+	scanDueDates.close();
+	scanPriorityLevels.close();
+	}
+	catch (NoSuchElementException e){
+		// TODO Auto-generated catch block
+					e.printStackTrace();
+	}
 }
 
 public void retrieveValuesFromTextStrings() throws IOException {

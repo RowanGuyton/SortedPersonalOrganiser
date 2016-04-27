@@ -260,33 +260,37 @@ public class NewProjectGUI {
 				newProjectNameLbl.setText("Sorted!");
 				
 				//ProjectArraysAndStorage addNewProject = new ProjectArraysAndStorage();
-				projectArraysAndStorage.addProjectToArrayList(newProject);
+				//projectArraysAndStorage.addProjectToArrayList(newProject);
 				
-				newProjectTextField.setText(projectArraysAndStorage.projectArrayListSizeToString());
+				//newProjectTextField.setText(projectArraysAndStorage.projectArrayListSizeToString());
 				
-				File projectList = new File("projectlist.txt");							//These two functions need to be split somehow
-																						//Second part of the event handler code creates a file object and writes
-				try {																	//to it values retrieved from the newly instantiated Project object using PW, BW, and FW
-					PrintWriter projectPrinter = new PrintWriter (new BufferedWriter (new FileWriter(projectList, true)));
-					projectPrinter.print(newProject.getProjectName()+" "+newProject.getprojectStartDate()+" "+newProject.getProjectDueDate()+" "+newProject.getProjectPriority()+"\n");
-					projectPrinter.close();
+				File projectNames = new File("projectnames.txt");							//These two functions need to be split somehow
+				File projectStartDates = new File("projectstartdates.txt");
+				File projectDueDates = new File("projectduedates.txt");
+				File projectPriorityLevels = new File("projectprioritylevels.txt");							//Second part of the event handler code creates a file object and writes
+				
+				try {																		//to it values retrieved from the newly instantiated Project object using PW, BW, and FW
+					PrintWriter projectNamePrinter = new PrintWriter (new BufferedWriter (new FileWriter(projectNames, true)));
+					PrintWriter projectStartDatePrinter = new PrintWriter (new BufferedWriter (new FileWriter(projectStartDates, true)));
+					PrintWriter projectDueDatePrinter = new PrintWriter (new BufferedWriter (new FileWriter(projectDueDates, true)));
+					PrintWriter projectPriorityLevelPrinter = new PrintWriter (new BufferedWriter (new FileWriter(projectPriorityLevels, true)));
+					
+					projectNamePrinter.print(newProject.getProjectName()+"\n");
+					projectStartDatePrinter.print(newProject.getprojectStartDate()+"\n");
+					projectDueDatePrinter.print(newProject.getProjectDueDate()+"\n");
+					projectPriorityLevelPrinter.print(newProject.getProjectPriority()+"\n");
+					
+					projectNamePrinter.close();
+					projectStartDatePrinter.close();
+					projectDueDatePrinter.close();
+					projectPriorityLevelPrinter.close();
+					//projectPrinter.close();
 					} 
 				
 				catch (IOException e) 
 				{
 					e.printStackTrace();
 				}
-				
-				/*
-				try {
-					projectArraysAndStorage.newProjectManipulableList();
-				} 
-				catch (FileNotFoundException e) 
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				*/
 				
 			}
 		});
@@ -321,17 +325,7 @@ public class NewProjectGUI {
 				indProjectStartDateTextField.setText(splitProjectValues[1]);			//to specific text field
 				indProjectDueDateTextField.setText(splitProjectValues[2]);
 				indProjectUrgencyTextField.setText(splitProjectValues[3]);
-				/*
-				try 
-				{
-					projectArraysAndStorage.retrieveValuesFromTextStrings();
-				} 
-				catch (IOException e) 
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}	
-				*/
+				
 			}
 		});
 		allProjectsSubPanel2.add(btnViewSingleProject);
@@ -359,7 +353,7 @@ public class NewProjectGUI {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		allProjectsList = new JList<String>(projectArraysAndStorage.projectsStringArray);
+		allProjectsList = new JList<String>(projectArraysAndStorage.getProjectNameArray());
 		allProjectsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);			//List is created from projectsStringArray
 		allProjectsList.setLayoutOrientation(JList.VERTICAL);
 		allProjectsList.setVisibleRowCount(1000);
